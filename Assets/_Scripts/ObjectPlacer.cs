@@ -17,7 +17,7 @@ public class ObjectPlacer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        UpdateCursor();
+        //UpdateCursor();
         if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
         {
             //Instantiate(objectToPlacePrefab, transform.position, transform.rotation);
@@ -25,7 +25,8 @@ public class ObjectPlacer : MonoBehaviour
             raycastManager.Raycast(Input.GetTouch(0).position, hits, UnityEngine.XR.ARSubsystems.TrackableType.Planes);
             if (hits.Count > 0)
             {
-                Instantiate(objectToPlacePrefab, hits[0].pose.position, hits[0].pose.rotation);
+                var gb = Instantiate(objectToPlacePrefab, hits[0].pose.position, hits[0].pose.rotation);
+                PlanetManager.instance.AddPlanet(gb.GetComponent<Planet>());
             }
         }
 
