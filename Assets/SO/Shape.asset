@@ -25,7 +25,7 @@ MonoBehaviour:
         roughtness: 2.2
         persistence: 0.5
         center: {x: 3.25, y: 0, z: 0}
-        minValue: 0.9
+        minValue: 1
       rigidNoiseSettings:
         strength: 1
         numLayer: 1
@@ -43,10 +43,10 @@ MonoBehaviour:
         strength: 1
         numLayer: 4
         baseRoughness: 1.49
-        roughtness: 3.32
-        persistence: 0.2
+        roughtness: 1.54
+        persistence: 1
         center: {x: 0, y: 0, z: 0}
-        minValue: 0
+        minValue: 1.2
       rigidNoiseSettings:
         strength: 1
         numLayer: 1
@@ -69,11 +69,11 @@ MonoBehaviour:
         center: {x: 0, y: 0, z: 0}
         minValue: 0
       rigidNoiseSettings:
-        strength: 2.04
+        strength: 0.37
         numLayer: 4
         baseRoughness: 1
         roughtness: 2
-        persistence: 0.7
+        persistence: 0.96
         center: {x: 0, y: 0, z: 0}
         minValue: 0
-        weightMultiplier: 0.8
+        weightMultiplier: 2
