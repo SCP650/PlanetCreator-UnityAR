@@ -6,5 +6,6 @@ using UnityEngine;
 public class ColorSettings : ScriptableObject
 {
     public Gradient gradient;
+    public Gradient oceanColor;
     public Material planetMaterial;
 }

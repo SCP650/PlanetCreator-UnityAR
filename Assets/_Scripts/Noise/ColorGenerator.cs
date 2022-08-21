@@ -13,7 +13,7 @@ public class ColorGenerator
         this.settings = settings;
         if(texture == null)
         {
-            texture = new Texture2D(textureResolution, 1);
+            texture = new Texture2D(textureResolution * 2, 1);//first half are ocean texture
         }
         
     }
@@ -25,10 +25,18 @@ public class ColorGenerator
 
     public void UpdateColor()
     {
-        Color[] colors = new Color[textureResolution];
-        for (int i = 0; i < textureResolution; i++)
+        Color[] colors = new Color[textureResolution*2];
+        for (int i = 0; i < textureResolution*2; i++)
         {
-            colors[i] = settings.gradient.Evaluate(i / (textureResolution - 1f));
+            if (i < textureResolution)
+            {
+                colors[i] = settings.oceanColor.Evaluate(i / (textureResolution - 1f));
+            }
+            else
+            {
+                colors[i] = settings.gradient.Evaluate((i - textureResolution)/ (textureResolution - 1f));
+            }
+            
         }
         texture.SetPixels(colors);
         texture.Apply();

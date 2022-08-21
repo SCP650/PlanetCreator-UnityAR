@@ -24,7 +24,7 @@ public class SimpleNoiseFilter : INoiseFilter
             amplitude *= settings.persistence;
             frequency *= settings.roughtness;
         }
-        noiseValue = Mathf.Max(0, noiseValue - settings.minValue);
+        noiseValue = noiseValue - settings.minValue;
         return noiseValue*settings.strength;
     }
 }
