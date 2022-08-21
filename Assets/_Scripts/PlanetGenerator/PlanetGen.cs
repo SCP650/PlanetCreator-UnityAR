@@ -47,8 +47,18 @@ public class PlanetGen : MonoBehaviour
         }
     }
 
-    public void GeneratePlanet()
+    public void GeneratePlanet(ShapeSettings shapeSettings = null, ColorSettings colorSettings = null)
     {
+        if(shapeSettings != null)
+        {
+            this.shapeSettings = shapeSettings;
+        }
+
+        if(colorSettings != null)
+        {
+            this.colorSettings = colorSettings;
+        }
+
         Initialize();
         GenerateMesh();
         GenerateColor();

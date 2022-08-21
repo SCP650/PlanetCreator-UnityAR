@@ -15,4 +15,17 @@ public class ShapeSettings : ScriptableObject
         public bool useFirstLayerAsMask = true;
         public NoiseSettings noiseSettings;
     }
+
+    public void Init(float radius, NoiseLayer[] noiseLayers)
+    {
+        this.planetRadius = radius;
+        this.noiseLayers = noiseLayers;
+    }
+
+    public static ShapeSettings CreateInstance(float radius, NoiseLayer[] noiseLayers)
+    {
+        var data = ScriptableObject.CreateInstance<ShapeSettings>();
+        data.Init(radius, noiseLayers);
+        return data;
+    }
 }
