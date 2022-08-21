@@ -5,14 +5,20 @@ using UnityEngine;
 public class PlanetFactory : MonoBehaviour
 {
     public GameObject PlanetPrefab;
+    public Shader shader;
 
     public void CreatePlanet(Vector3 position)
     {
         float radius = Random.Range(0.5f, 5);
         ShapeSettings ss = ShapeSettings.CreateInstance(radius, CreateNoiseSettings());
+
+        Material mat = new Material(shader);
+        mat.SetFloat("_smoothness", 0.5f);
+        ColorSettings cs = ColorSettings.CreateInstance(CreateOceanGrident(), CreateOceanGrident(), mat);
+
         var gb = Instantiate(PlanetPrefab, position, Quaternion.identity);
         var pg = gb.GetComponent<PlanetGen>();
-        pg.GeneratePlanet(ss);
+        pg.GeneratePlanet(ss,cs);
     }
 
     private ShapeSettings.NoiseLayer[] CreateNoiseSettings()
@@ -29,7 +35,7 @@ public class PlanetFactory : MonoBehaviour
             ns.simpleNoiseSettings.center = Random.insideUnitSphere * Random.Range(0.5f, 10);
             ns.simpleNoiseSettings.minValue = (i == 0) ? Random.Range(0.9f, 1.1f) : Random.Range(-3.0f, 3.0f);
             ns.simpleNoiseSettings.numLayer = 4;
-            ns.simpleNoiseSettings.persistence = (i == 0) ? 0.5f : Random.Range(0.5f, 1.5f);
+            ns.simpleNoiseSettings.persistence = (i == 0) ? 0.5f : Random.Range(0.3f, 1f);
             ns.simpleNoiseSettings.roughtness = Random.Range(1.0f, 5f);
             ns.simpleNoiseSettings.strength = (i == 0) ? Random.Range(0.05f, 0.1f) : Random.Range(-3.0f, 3.0f);
             if (ns.filterType == NoiseSettings.FilterType.Rigid)
@@ -45,8 +51,22 @@ public class PlanetFactory : MonoBehaviour
     }
 
 
-    private void CreateColorSettings()
+    private Gradient CreateOceanGrident()
     {
+        Gradient g = new Gradient();
+        g.mode = GradientMode.Blend;
+        GradientColorKey[] colorKeys = new GradientColorKey[Random.Range(2,6)];
+        for (int i = 0; i < colorKeys.Length; i++)
+        {
+            float t = i / (colorKeys.Length - 1);
+            Color c = new Color(Random.Range(0,1f), Random.Range(0, 1f), Random.Range(0, 1f),1);
+            GradientColorKey k = new GradientColorKey(c,t);
+            colorKeys[i] = k;
+        }
+        GradientAlphaKey[] alphakeys = new GradientAlphaKey[1];
+        alphakeys[0] = new GradientAlphaKey(1,1);
 
+        g.SetKeys(colorKeys, alphakeys);
+        return g;
     }
 }
