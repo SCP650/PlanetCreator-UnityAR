@@ -11,12 +11,17 @@ public class UIManager : MonoBehaviour
     public TextMeshProUGUI leftPanelNameText;
     public TextMeshProUGUI leftPanelMassText;
     public TextMeshProUGUI leftPanelVelocityText;
+    public GameObject simulateButton;
+    public GameObject hideUIButton;
+
+    private bool isUIHidden;
 
     // Start is called before the first frame update
     void Start()
     {
         PlanetManager.instance.OnGameModeChange.AddListener(OnGameModeChange);
         PlanetManager.instance.OnFocusPlanetChanged.AddListener(HandleCloestPlanetChange);
+        PlanetManager.instance.OnUIHiddenChanged.AddListener(ToogleALlUI);
         OnGameModeChange(PlanetManager.instance.currentMode);
     }
 
@@ -38,5 +43,26 @@ public class UIManager : MonoBehaviour
         leftPanelNameText.text = $"Planet Name: {planet.name}";
         leftPanelMassText.text = $"Mass: { Mathf.Round(planet.Mass* 100f) / 100f} units";
         leftPanelVelocityText.text = "";//$"Velocity: {planet.velocity}";
+    }
+
+    public void ToogleALlUI()
+    {
+        isUIHidden = !isUIHidden;
+        if (isUIHidden)
+        {
+            leftTextPanel.SetActive(false);
+            simulateButton.SetActive(false);
+            hideUIButton.SetActive(false);
+        }
+        else
+        {
+            if(PlanetManager.instance.currentMode == GameMode.Edit)
+            {
+                leftTextPanel.SetActive(true);
+            }
+            simulateButton.SetActive(true);
+            hideUIButton.SetActive(true);
+        }
+        PlanetManager.instance.isUIHidden = isUIHidden;
     }
 }

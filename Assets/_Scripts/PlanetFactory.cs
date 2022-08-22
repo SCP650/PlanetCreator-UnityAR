@@ -9,7 +9,7 @@ public class PlanetFactory : MonoBehaviour
 
     public Planet CreatePlanet(Vector3 position, Quaternion rotation)
     {
-        float radius = Random.Range(0.1f, 2f);
+        float radius = Random.Range(0.05f, 0.8f);
         ShapeSettings ss = ShapeSettings.CreateInstance(radius, CreateNoiseSettings());
 
         Material mat = new Material(shader);

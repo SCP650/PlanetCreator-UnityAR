@@ -22,7 +22,7 @@ public class Planet : MonoBehaviour
     public void Init(float radius)
     {
         rigidbody = GetComponent<Rigidbody>();
-        rigidbody.mass *= radius*2;
+        rigidbody.mass = Mathf.Pow((radius+1),3);
         rigidbody.useGravity = false;
         mass = rigidbody.mass;
 

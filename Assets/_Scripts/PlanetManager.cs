@@ -15,6 +15,8 @@ public class PlanetManager : MonoBehaviour
     public int cloestPlanetToCamera = 0;
     public UnityEvent<GameMode> OnGameModeChange;
     public UnityEvent<Planet> OnFocusPlanetChanged;
+    public UnityEvent OnUIHiddenChanged;
+    public bool isUIHidden;
 
     private List<(int, int)> pairs;
     private List<Planet> planets = new List<Planet>();
@@ -31,6 +33,11 @@ public class PlanetManager : MonoBehaviour
     {
         currentMode = currentMode == GameMode.Simulation ? GameMode.Edit : GameMode.Simulation;
         OnGameModeChange.Invoke(currentMode);
+    }
+
+    public void ToggleUI()
+    {
+        OnUIHiddenChanged.Invoke();
     }
 
     private void Awake()
@@ -52,7 +59,7 @@ public class PlanetManager : MonoBehaviour
         {
             planets.Add(p);
             p.GetComponent<PlanetGen>().GeneratePlanet();
-            p.Init(1);
+            p.Init(0.2f);
         }
         calculatePairs();
         OnGameModeChange.AddListener(HandleGameModeChange);

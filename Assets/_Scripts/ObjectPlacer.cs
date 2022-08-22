@@ -21,6 +21,11 @@ public class ObjectPlacer : MonoBehaviour
         //UpdateCursor();
         if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
         {
+            if (PlanetManager.instance.isUIHidden)
+            {
+                PlanetManager.instance.ToggleUI();
+                return;
+            }
             if (EventSystem.current.IsPointerOverGameObject(Input.GetTouch(0).fingerId)) return;
             //Instantiate(objectToPlacePrefab, transform.position, transform.rotation);
             List<ARRaycastHit> hits = new List<ARRaycastHit>();
