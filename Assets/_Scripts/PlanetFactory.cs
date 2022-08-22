@@ -7,18 +7,23 @@ public class PlanetFactory : MonoBehaviour
     public GameObject PlanetPrefab;
     public Shader shader;
 
-    public void CreatePlanet(Vector3 position)
+    public Planet CreatePlanet(Vector3 position, Quaternion rotation)
     {
-        float radius = Random.Range(0.5f, 5);
+        float radius = Random.Range(0.1f, 2f);
         ShapeSettings ss = ShapeSettings.CreateInstance(radius, CreateNoiseSettings());
 
         Material mat = new Material(shader);
         mat.SetFloat("_smoothness", 0.5f);
         ColorSettings cs = ColorSettings.CreateInstance(CreateOceanGrident(), CreateOceanGrident(), mat);
 
-        var gb = Instantiate(PlanetPrefab, position, Quaternion.identity);
+        var gb = Instantiate(PlanetPrefab, position, rotation);
         var pg = gb.GetComponent<PlanetGen>();
         pg.GeneratePlanet(ss,cs);
+
+        var planet = gb.GetComponent<Planet>();
+        planet.Init(radius);
+        return planet;
+        
     }
 
     private ShapeSettings.NoiseLayer[] CreateNoiseSettings()

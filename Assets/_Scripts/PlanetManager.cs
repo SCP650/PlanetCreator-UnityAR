@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
+[RequireComponent(typeof(PlanetFactory))]
 public class PlanetManager : MonoBehaviour
 {
     public static PlanetManager instance { get; private set; }
@@ -18,10 +19,11 @@ public class PlanetManager : MonoBehaviour
     private List<(int, int)> pairs;
     private List<Planet> planets = new List<Planet>();
     private bool shouldCalculateForce;
+    private PlanetFactory factory;
 
-    public void AddPlanet(Planet p)
+    public void CreatePlanet(Vector3 position, Quaternion rotation)
     {
-        planets.Add(p);
+        planets.Add(factory.CreatePlanet(position, rotation));
         calculatePairs();
     }
 
@@ -49,10 +51,13 @@ public class PlanetManager : MonoBehaviour
         foreach (var p in initialPlanets)
         {
             planets.Add(p);
+            p.GetComponent<PlanetGen>().GeneratePlanet();
+            p.Init(1);
         }
         calculatePairs();
         OnGameModeChange.AddListener(HandleGameModeChange);
         HandleGameModeChange(currentMode);
+        factory = GetComponent<PlanetFactory>();
     }
 
     private void Update()

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
+[RequireComponent(typeof(SphereCollider))]
 public class Planet : MonoBehaviour
 {
     public int id = -1;
@@ -18,20 +19,24 @@ public class Planet : MonoBehaviour
     private float mass;
     private Rigidbody rigidbody;
 
-    private void Start()
+    public void Init(float radius)
     {
         rigidbody = GetComponent<Rigidbody>();
-        rigidbody.mass *= Random.Range(1f,2f);
+        rigidbody.mass *= radius*2;
+        rigidbody.useGravity = false;
         mass = rigidbody.mass;
+
+        GetComponent<SphereCollider>().radius = radius;
+
         rigidbody.velocity = Random.insideUnitSphere.normalized * Random.Range(0,3);
-        transform.localScale *= mass;
         name = GenerateName(Random.Range(3,10));
     }
 
     public void AddForceTo(float thrust, Vector3 direction)
     {
+        if (!rigidbody) return;
         //Debug.Log($"{id} planet apply force to {direction} with thrust {thrust}");
-        Debug.DrawLine(transform.position, direction,Color.red,0.2f);
+        Debug.DrawLine(transform.position, direction*5+transform.position,Color.red,0.2f);
         rigidbody.AddForce(direction * thrust);
     }
 

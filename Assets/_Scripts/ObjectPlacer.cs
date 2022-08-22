@@ -27,8 +27,7 @@ public class ObjectPlacer : MonoBehaviour
             raycastManager.Raycast(Input.GetTouch(0).position, hits, UnityEngine.XR.ARSubsystems.TrackableType.Planes);
             if (hits.Count > 0)
             {
-                var gb = Instantiate(objectToPlacePrefab, hits[0].pose.position, hits[0].pose.rotation);
-                PlanetManager.instance.AddPlanet(gb.GetComponent<Planet>());
+                PlanetManager.instance.CreatePlanet(hits[0].pose.position, hits[0].pose.rotation);
             }
         }
 
