@@ -1177,7 +1177,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 72
+  m_fontSize: 30.25
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -1312,7 +1312,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 72
+  m_fontSize: 30.25
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -1373,6 +1373,7 @@ GameObject:
   - component: {fileID: 928896861}
   - component: {fileID: 928896860}
   - component: {fileID: 928896862}
+  - component: {fileID: 928896863}
   m_Layer: 0
   m_Name: Managers
   m_TagString: Untagged
@@ -1441,6 +1442,25 @@ MonoBehaviour:
   PlanetPrefab: {fileID: 8074382037231384139, guid: a30e00fb0a1a74bb0864d5857c12293d,
     type: 3}
   shader: {fileID: -6465566751694194690, guid: 17403064f3c774859adb8854de4a3e37, type: 3}
+--- !u!114 &928896863
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 928896859}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2821789d320f74c96a602b93d099f5c5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bgms:
+  - {fileID: 8300000, guid: 62cae0458c06246c5a873a9de7d8f893, type: 3}
+  - {fileID: 8300000, guid: fa5add1097f254536920b3c09dcb9ec1, type: 3}
+  - {fileID: 8300000, guid: 66ea1bb99fd6d42549c4246aba21b372, type: 3}
+  - {fileID: 8300000, guid: 2a80106705912437fad155d85da23a77, type: 3}
+  - {fileID: 8300000, guid: 9e1083cc7bd004ab898501c61c02cac1, type: 3}
+  source: {fileID: 0}
 --- !u!1 &929217933
 GameObject:
   m_ObjectHideFlags: 0
@@ -1526,7 +1546,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 45.3
+  m_fontSize: 12.6
   m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -1661,7 +1681,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 72
+  m_fontSize: 30.25
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -1796,7 +1816,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 72
+  m_fontSize: 22.45
   m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 1
